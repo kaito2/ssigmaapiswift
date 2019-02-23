@@ -50,12 +50,57 @@ struct Ssigmaapi_Type_UserActivity {
     set {_uniqueStorage()._windowList = newValue}
   }
 
+  var userState: Ssigmaapi_Type_UserActivity.UserState {
+    get {return _storage._userState}
+    set {_uniqueStorage()._userState = newValue}
+  }
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  enum UserState: SwiftProtobuf.Enum {
+    typealias RawValue = Int
+    case working // = 0
+    case away // = 1
+    case UNRECOGNIZED(Int)
+
+    init() {
+      self = .working
+    }
+
+    init?(rawValue: Int) {
+      switch rawValue {
+      case 0: self = .working
+      case 1: self = .away
+      default: self = .UNRECOGNIZED(rawValue)
+      }
+    }
+
+    var rawValue: Int {
+      switch self {
+      case .working: return 0
+      case .away: return 1
+      case .UNRECOGNIZED(let i): return i
+      }
+    }
+
+  }
 
   init() {}
 
   fileprivate var _storage = _StorageClass.defaultInstance
 }
+
+#if swift(>=4.2)
+
+extension Ssigmaapi_Type_UserActivity.UserState: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  static var allCases: [Ssigmaapi_Type_UserActivity.UserState] = [
+    .working,
+    .away,
+  ]
+}
+
+#endif  // swift(>=4.2)
 
 struct Ssigmaapi_Type_KeyboardInput {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
@@ -107,7 +152,7 @@ struct Ssigmaapi_Type_ApplicationWindow {
     set {_uniqueStorage()._width = newValue}
   }
 
-  /// アプリケーションタイトル
+  /// ウィンドウタイトル
   var title: String {
     get {return _storage._title}
     set {_uniqueStorage()._title = newValue}
@@ -209,6 +254,7 @@ extension Ssigmaapi_Type_UserActivity: SwiftProtobuf.Message, SwiftProtobuf._Mes
     2: .standard(proto: "end_timestamp"),
     3: .standard(proto: "keyboard_input"),
     4: .standard(proto: "window_list"),
+    5: .standard(proto: "user_state"),
   ]
 
   fileprivate class _StorageClass {
@@ -216,6 +262,7 @@ extension Ssigmaapi_Type_UserActivity: SwiftProtobuf.Message, SwiftProtobuf._Mes
     var _endTimestamp: Int64 = 0
     var _keyboardInput: Ssigmaapi_Type_KeyboardInput? = nil
     var _windowList: [Ssigmaapi_Type_ApplicationWindow] = []
+    var _userState: Ssigmaapi_Type_UserActivity.UserState = .working
 
     static let defaultInstance = _StorageClass()
 
@@ -226,6 +273,7 @@ extension Ssigmaapi_Type_UserActivity: SwiftProtobuf.Message, SwiftProtobuf._Mes
       _endTimestamp = source._endTimestamp
       _keyboardInput = source._keyboardInput
       _windowList = source._windowList
+      _userState = source._userState
     }
   }
 
@@ -245,6 +293,7 @@ extension Ssigmaapi_Type_UserActivity: SwiftProtobuf.Message, SwiftProtobuf._Mes
         case 2: try decoder.decodeSingularInt64Field(value: &_storage._endTimestamp)
         case 3: try decoder.decodeSingularMessageField(value: &_storage._keyboardInput)
         case 4: try decoder.decodeRepeatedMessageField(value: &_storage._windowList)
+        case 5: try decoder.decodeSingularEnumField(value: &_storage._userState)
         default: break
         }
       }
@@ -265,6 +314,9 @@ extension Ssigmaapi_Type_UserActivity: SwiftProtobuf.Message, SwiftProtobuf._Mes
       if !_storage._windowList.isEmpty {
         try visitor.visitRepeatedMessageField(value: _storage._windowList, fieldNumber: 4)
       }
+      if _storage._userState != .working {
+        try visitor.visitSingularEnumField(value: _storage._userState, fieldNumber: 5)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -278,6 +330,7 @@ extension Ssigmaapi_Type_UserActivity: SwiftProtobuf.Message, SwiftProtobuf._Mes
         if _storage._endTimestamp != rhs_storage._endTimestamp {return false}
         if _storage._keyboardInput != rhs_storage._keyboardInput {return false}
         if _storage._windowList != rhs_storage._windowList {return false}
+        if _storage._userState != rhs_storage._userState {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -285,6 +338,13 @@ extension Ssigmaapi_Type_UserActivity: SwiftProtobuf.Message, SwiftProtobuf._Mes
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
+}
+
+extension Ssigmaapi_Type_UserActivity.UserState: SwiftProtobuf._ProtoNameProviding {
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "WORKING"),
+    1: .same(proto: "AWAY"),
+  ]
 }
 
 extension Ssigmaapi_Type_KeyboardInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
