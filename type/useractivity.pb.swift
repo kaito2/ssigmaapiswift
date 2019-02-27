@@ -24,14 +24,14 @@ struct Ssigmaapi_Type_UserActivity {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  /// milisecond
-  var startTimestamp: Int64 {
+  /// second
+  var startTimestamp: Int32 {
     get {return _storage._startTimestamp}
     set {_uniqueStorage()._startTimestamp = newValue}
   }
 
-  /// milisecond
-  var endTimestamp: Int64 {
+  /// second
+  var endTimestamp: Int32 {
     get {return _storage._endTimestamp}
     set {_uniqueStorage()._endTimestamp = newValue}
   }
@@ -64,7 +64,7 @@ struct Ssigmaapi_Type_UserActivity {
   /// Clears the value of `mouseInput`. Subsequent reads from it will return its default value.
   mutating func clearMouseInput() {_uniqueStorage()._mouseInput = nil}
 
-  var switchApplicationCount: Int64 {
+  var switchApplicationCount: Int32 {
     get {return _storage._switchApplicationCount}
     set {_uniqueStorage()._switchApplicationCount = newValue}
   }
@@ -121,7 +121,7 @@ struct Ssigmaapi_Type_KeyboardInput {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var strokeCount: Int64 = 0
+  var strokeCount: Int32 = 0
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -133,13 +133,13 @@ struct Ssigmaapi_Type_MouseInput {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var clickCount: Int64 = 0
+  var clickCount: Int32 = 0
 
-  var leftClickCount: Int64 = 0
+  var leftClickCount: Int32 = 0
 
-  var middleClickCount: Int64 = 0
+  var middleClickCount: Int32 = 0
 
-  var rightClickCount: Int64 = 0
+  var rightClickCount: Int32 = 0
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -151,9 +151,9 @@ struct Ssigmaapi_Type_Point {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var x: Int64 = 0
+  var x: Int32 = 0
 
-  var y: Int64 = 0
+  var y: Int32 = 0
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -174,12 +174,12 @@ struct Ssigmaapi_Type_ApplicationWindow {
   /// Clears the value of `lefttop`. Subsequent reads from it will return its default value.
   mutating func clearLefttop() {_uniqueStorage()._lefttop = nil}
 
-  var height: Int64 {
+  var height: Int32 {
     get {return _storage._height}
     set {_uniqueStorage()._height = newValue}
   }
 
-  var width: Int64 {
+  var width: Int32 {
     get {return _storage._width}
     set {_uniqueStorage()._width = newValue}
   }
@@ -218,8 +218,8 @@ struct Ssigmaapi_Type_ApplicationWindow {
     set {_uniqueStorage()._windowState = newValue}
   }
 
-  /// milisecond
-  var timestamp: Int64 {
+  /// second
+  var timestamp: Int32 {
     get {return _storage._timestamp}
     set {_uniqueStorage()._timestamp = newValue}
   }
@@ -292,13 +292,13 @@ extension Ssigmaapi_Type_UserActivity: SwiftProtobuf.Message, SwiftProtobuf._Mes
   ]
 
   fileprivate class _StorageClass {
-    var _startTimestamp: Int64 = 0
-    var _endTimestamp: Int64 = 0
+    var _startTimestamp: Int32 = 0
+    var _endTimestamp: Int32 = 0
     var _keyboardInput: Ssigmaapi_Type_KeyboardInput? = nil
     var _windowList: [Ssigmaapi_Type_ApplicationWindow] = []
     var _userState: Ssigmaapi_Type_UserActivity.UserState = .working
     var _mouseInput: Ssigmaapi_Type_MouseInput? = nil
-    var _switchApplicationCount: Int64 = 0
+    var _switchApplicationCount: Int32 = 0
 
     static let defaultInstance = _StorageClass()
 
@@ -327,13 +327,13 @@ extension Ssigmaapi_Type_UserActivity: SwiftProtobuf.Message, SwiftProtobuf._Mes
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
         switch fieldNumber {
-        case 1: try decoder.decodeSingularInt64Field(value: &_storage._startTimestamp)
-        case 2: try decoder.decodeSingularInt64Field(value: &_storage._endTimestamp)
+        case 1: try decoder.decodeSingularInt32Field(value: &_storage._startTimestamp)
+        case 2: try decoder.decodeSingularInt32Field(value: &_storage._endTimestamp)
         case 3: try decoder.decodeSingularMessageField(value: &_storage._keyboardInput)
         case 4: try decoder.decodeRepeatedMessageField(value: &_storage._windowList)
         case 5: try decoder.decodeSingularEnumField(value: &_storage._userState)
         case 6: try decoder.decodeSingularMessageField(value: &_storage._mouseInput)
-        case 7: try decoder.decodeSingularInt64Field(value: &_storage._switchApplicationCount)
+        case 7: try decoder.decodeSingularInt32Field(value: &_storage._switchApplicationCount)
         default: break
         }
       }
@@ -343,10 +343,10 @@ extension Ssigmaapi_Type_UserActivity: SwiftProtobuf.Message, SwiftProtobuf._Mes
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       if _storage._startTimestamp != 0 {
-        try visitor.visitSingularInt64Field(value: _storage._startTimestamp, fieldNumber: 1)
+        try visitor.visitSingularInt32Field(value: _storage._startTimestamp, fieldNumber: 1)
       }
       if _storage._endTimestamp != 0 {
-        try visitor.visitSingularInt64Field(value: _storage._endTimestamp, fieldNumber: 2)
+        try visitor.visitSingularInt32Field(value: _storage._endTimestamp, fieldNumber: 2)
       }
       if let v = _storage._keyboardInput {
         try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
@@ -361,7 +361,7 @@ extension Ssigmaapi_Type_UserActivity: SwiftProtobuf.Message, SwiftProtobuf._Mes
         try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
       }
       if _storage._switchApplicationCount != 0 {
-        try visitor.visitSingularInt64Field(value: _storage._switchApplicationCount, fieldNumber: 7)
+        try visitor.visitSingularInt32Field(value: _storage._switchApplicationCount, fieldNumber: 7)
       }
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -404,7 +404,7 @@ extension Ssigmaapi_Type_KeyboardInput: SwiftProtobuf.Message, SwiftProtobuf._Me
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
-      case 1: try decoder.decodeSingularInt64Field(value: &self.strokeCount)
+      case 1: try decoder.decodeSingularInt32Field(value: &self.strokeCount)
       default: break
       }
     }
@@ -412,7 +412,7 @@ extension Ssigmaapi_Type_KeyboardInput: SwiftProtobuf.Message, SwiftProtobuf._Me
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if self.strokeCount != 0 {
-      try visitor.visitSingularInt64Field(value: self.strokeCount, fieldNumber: 1)
+      try visitor.visitSingularInt32Field(value: self.strokeCount, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -436,10 +436,10 @@ extension Ssigmaapi_Type_MouseInput: SwiftProtobuf.Message, SwiftProtobuf._Messa
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
-      case 1: try decoder.decodeSingularInt64Field(value: &self.clickCount)
-      case 2: try decoder.decodeSingularInt64Field(value: &self.leftClickCount)
-      case 3: try decoder.decodeSingularInt64Field(value: &self.middleClickCount)
-      case 4: try decoder.decodeSingularInt64Field(value: &self.rightClickCount)
+      case 1: try decoder.decodeSingularInt32Field(value: &self.clickCount)
+      case 2: try decoder.decodeSingularInt32Field(value: &self.leftClickCount)
+      case 3: try decoder.decodeSingularInt32Field(value: &self.middleClickCount)
+      case 4: try decoder.decodeSingularInt32Field(value: &self.rightClickCount)
       default: break
       }
     }
@@ -447,16 +447,16 @@ extension Ssigmaapi_Type_MouseInput: SwiftProtobuf.Message, SwiftProtobuf._Messa
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if self.clickCount != 0 {
-      try visitor.visitSingularInt64Field(value: self.clickCount, fieldNumber: 1)
+      try visitor.visitSingularInt32Field(value: self.clickCount, fieldNumber: 1)
     }
     if self.leftClickCount != 0 {
-      try visitor.visitSingularInt64Field(value: self.leftClickCount, fieldNumber: 2)
+      try visitor.visitSingularInt32Field(value: self.leftClickCount, fieldNumber: 2)
     }
     if self.middleClickCount != 0 {
-      try visitor.visitSingularInt64Field(value: self.middleClickCount, fieldNumber: 3)
+      try visitor.visitSingularInt32Field(value: self.middleClickCount, fieldNumber: 3)
     }
     if self.rightClickCount != 0 {
-      try visitor.visitSingularInt64Field(value: self.rightClickCount, fieldNumber: 4)
+      try visitor.visitSingularInt32Field(value: self.rightClickCount, fieldNumber: 4)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -481,8 +481,8 @@ extension Ssigmaapi_Type_Point: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
-      case 1: try decoder.decodeSingularInt64Field(value: &self.x)
-      case 2: try decoder.decodeSingularInt64Field(value: &self.y)
+      case 1: try decoder.decodeSingularInt32Field(value: &self.x)
+      case 2: try decoder.decodeSingularInt32Field(value: &self.y)
       default: break
       }
     }
@@ -490,10 +490,10 @@ extension Ssigmaapi_Type_Point: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if self.x != 0 {
-      try visitor.visitSingularInt64Field(value: self.x, fieldNumber: 1)
+      try visitor.visitSingularInt32Field(value: self.x, fieldNumber: 1)
     }
     if self.y != 0 {
-      try visitor.visitSingularInt64Field(value: self.y, fieldNumber: 2)
+      try visitor.visitSingularInt32Field(value: self.y, fieldNumber: 2)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -523,15 +523,15 @@ extension Ssigmaapi_Type_ApplicationWindow: SwiftProtobuf.Message, SwiftProtobuf
 
   fileprivate class _StorageClass {
     var _lefttop: Ssigmaapi_Type_Point? = nil
-    var _height: Int64 = 0
-    var _width: Int64 = 0
+    var _height: Int32 = 0
+    var _width: Int32 = 0
     var _title: String = String()
     var _programName: String = String()
     var _description_p: String = String()
     var _company: String = String()
     var _isForeground: Bool = false
     var _windowState: Ssigmaapi_Type_ApplicationWindow.WindowState = .normal
-    var _timestamp: Int64 = 0
+    var _timestamp: Int32 = 0
 
     static let defaultInstance = _StorageClass()
 
@@ -564,15 +564,15 @@ extension Ssigmaapi_Type_ApplicationWindow: SwiftProtobuf.Message, SwiftProtobuf
       while let fieldNumber = try decoder.nextFieldNumber() {
         switch fieldNumber {
         case 1: try decoder.decodeSingularMessageField(value: &_storage._lefttop)
-        case 2: try decoder.decodeSingularInt64Field(value: &_storage._height)
-        case 3: try decoder.decodeSingularInt64Field(value: &_storage._width)
+        case 2: try decoder.decodeSingularInt32Field(value: &_storage._height)
+        case 3: try decoder.decodeSingularInt32Field(value: &_storage._width)
         case 4: try decoder.decodeSingularStringField(value: &_storage._title)
         case 5: try decoder.decodeSingularStringField(value: &_storage._programName)
         case 6: try decoder.decodeSingularStringField(value: &_storage._description_p)
         case 7: try decoder.decodeSingularStringField(value: &_storage._company)
         case 8: try decoder.decodeSingularBoolField(value: &_storage._isForeground)
         case 9: try decoder.decodeSingularEnumField(value: &_storage._windowState)
-        case 10: try decoder.decodeSingularInt64Field(value: &_storage._timestamp)
+        case 10: try decoder.decodeSingularInt32Field(value: &_storage._timestamp)
         default: break
         }
       }
@@ -585,10 +585,10 @@ extension Ssigmaapi_Type_ApplicationWindow: SwiftProtobuf.Message, SwiftProtobuf
         try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
       }
       if _storage._height != 0 {
-        try visitor.visitSingularInt64Field(value: _storage._height, fieldNumber: 2)
+        try visitor.visitSingularInt32Field(value: _storage._height, fieldNumber: 2)
       }
       if _storage._width != 0 {
-        try visitor.visitSingularInt64Field(value: _storage._width, fieldNumber: 3)
+        try visitor.visitSingularInt32Field(value: _storage._width, fieldNumber: 3)
       }
       if !_storage._title.isEmpty {
         try visitor.visitSingularStringField(value: _storage._title, fieldNumber: 4)
@@ -609,7 +609,7 @@ extension Ssigmaapi_Type_ApplicationWindow: SwiftProtobuf.Message, SwiftProtobuf
         try visitor.visitSingularEnumField(value: _storage._windowState, fieldNumber: 9)
       }
       if _storage._timestamp != 0 {
-        try visitor.visitSingularInt64Field(value: _storage._timestamp, fieldNumber: 10)
+        try visitor.visitSingularInt32Field(value: _storage._timestamp, fieldNumber: 10)
       }
     }
     try unknownFields.traverse(visitor: &visitor)
