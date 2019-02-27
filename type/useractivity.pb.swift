@@ -55,6 +55,15 @@ struct Ssigmaapi_Type_UserActivity {
     set {_uniqueStorage()._userState = newValue}
   }
 
+  var mouseInput: Ssigmaapi_Type_MouseInput {
+    get {return _storage._mouseInput ?? Ssigmaapi_Type_MouseInput()}
+    set {_uniqueStorage()._mouseInput = newValue}
+  }
+  /// Returns true if `mouseInput` has been explicitly set.
+  var hasMouseInput: Bool {return _storage._mouseInput != nil}
+  /// Clears the value of `mouseInput`. Subsequent reads from it will return its default value.
+  mutating func clearMouseInput() {_uniqueStorage()._mouseInput = nil}
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   enum UserState: SwiftProtobuf.Enum {
@@ -108,6 +117,22 @@ struct Ssigmaapi_Type_KeyboardInput {
   // methods supported on all messages.
 
   var strokeCount: Int64 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Ssigmaapi_Type_MouseInput {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var leftClickCount: Int64 = 0
+
+  var middleClickCount: Int64 = 0
+
+  var rightClickCount: Int64 = 0
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -255,6 +280,7 @@ extension Ssigmaapi_Type_UserActivity: SwiftProtobuf.Message, SwiftProtobuf._Mes
     3: .standard(proto: "keyboard_input"),
     4: .standard(proto: "window_list"),
     5: .standard(proto: "user_state"),
+    6: .standard(proto: "mouse_input"),
   ]
 
   fileprivate class _StorageClass {
@@ -263,6 +289,7 @@ extension Ssigmaapi_Type_UserActivity: SwiftProtobuf.Message, SwiftProtobuf._Mes
     var _keyboardInput: Ssigmaapi_Type_KeyboardInput? = nil
     var _windowList: [Ssigmaapi_Type_ApplicationWindow] = []
     var _userState: Ssigmaapi_Type_UserActivity.UserState = .working
+    var _mouseInput: Ssigmaapi_Type_MouseInput? = nil
 
     static let defaultInstance = _StorageClass()
 
@@ -274,6 +301,7 @@ extension Ssigmaapi_Type_UserActivity: SwiftProtobuf.Message, SwiftProtobuf._Mes
       _keyboardInput = source._keyboardInput
       _windowList = source._windowList
       _userState = source._userState
+      _mouseInput = source._mouseInput
     }
   }
 
@@ -294,6 +322,7 @@ extension Ssigmaapi_Type_UserActivity: SwiftProtobuf.Message, SwiftProtobuf._Mes
         case 3: try decoder.decodeSingularMessageField(value: &_storage._keyboardInput)
         case 4: try decoder.decodeRepeatedMessageField(value: &_storage._windowList)
         case 5: try decoder.decodeSingularEnumField(value: &_storage._userState)
+        case 6: try decoder.decodeSingularMessageField(value: &_storage._mouseInput)
         default: break
         }
       }
@@ -317,6 +346,9 @@ extension Ssigmaapi_Type_UserActivity: SwiftProtobuf.Message, SwiftProtobuf._Mes
       if _storage._userState != .working {
         try visitor.visitSingularEnumField(value: _storage._userState, fieldNumber: 5)
       }
+      if let v = _storage._mouseInput {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -331,6 +363,7 @@ extension Ssigmaapi_Type_UserActivity: SwiftProtobuf.Message, SwiftProtobuf._Mes
         if _storage._keyboardInput != rhs_storage._keyboardInput {return false}
         if _storage._windowList != rhs_storage._windowList {return false}
         if _storage._userState != rhs_storage._userState {return false}
+        if _storage._mouseInput != rhs_storage._mouseInput {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -371,6 +404,47 @@ extension Ssigmaapi_Type_KeyboardInput: SwiftProtobuf.Message, SwiftProtobuf._Me
 
   static func ==(lhs: Ssigmaapi_Type_KeyboardInput, rhs: Ssigmaapi_Type_KeyboardInput) -> Bool {
     if lhs.strokeCount != rhs.strokeCount {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Ssigmaapi_Type_MouseInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MouseInput"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "left_click_count"),
+    2: .standard(proto: "middle_click_count"),
+    3: .standard(proto: "right_click_count"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularInt64Field(value: &self.leftClickCount)
+      case 2: try decoder.decodeSingularInt64Field(value: &self.middleClickCount)
+      case 3: try decoder.decodeSingularInt64Field(value: &self.rightClickCount)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.leftClickCount != 0 {
+      try visitor.visitSingularInt64Field(value: self.leftClickCount, fieldNumber: 1)
+    }
+    if self.middleClickCount != 0 {
+      try visitor.visitSingularInt64Field(value: self.middleClickCount, fieldNumber: 2)
+    }
+    if self.rightClickCount != 0 {
+      try visitor.visitSingularInt64Field(value: self.rightClickCount, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Ssigmaapi_Type_MouseInput, rhs: Ssigmaapi_Type_MouseInput) -> Bool {
+    if lhs.leftClickCount != rhs.leftClickCount {return false}
+    if lhs.middleClickCount != rhs.middleClickCount {return false}
+    if lhs.rightClickCount != rhs.rightClickCount {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
