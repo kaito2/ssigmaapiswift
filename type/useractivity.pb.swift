@@ -24,13 +24,13 @@ struct Ssigmaapi_Type_UserActivity {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  /// milisecond
+  /// second
   var startTimestamp: Int32 {
     get {return _storage._startTimestamp}
     set {_uniqueStorage()._startTimestamp = newValue}
   }
 
-  /// milisecond
+  /// second
   var endTimestamp: Int32 {
     get {return _storage._endTimestamp}
     set {_uniqueStorage()._endTimestamp = newValue}
@@ -218,7 +218,7 @@ struct Ssigmaapi_Type_ApplicationWindow {
     set {_uniqueStorage()._windowState = newValue}
   }
 
-  /// milisecond
+  /// second
   var timestamp: Int32 {
     get {return _storage._timestamp}
     set {_uniqueStorage()._timestamp = newValue}
